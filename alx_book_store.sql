@@ -8,8 +8,8 @@
 -- DROP DATABASE IF IT EXISTS (optional cleanup)
 DROP DATABASE IF EXISTS alx_book_store;
 
--- CREATE DATABASE
-CREATE DATABASE alx_book_store;
+-- CREATE DATABASE (with IF NOT EXISTS for safety)
+CREATE DATABASE IF NOT EXISTS alx_book_store;
 
 -- USE THE DATABASE
 USE alx_book_store;
@@ -17,7 +17,7 @@ USE alx_book_store;
 -- =========================================================
 -- TABLE: Authors
 -- =========================================================
-CREATE TABLE Authors (
+CREATE TABLE IF NOT EXISTS Authors (
     author_id INT AUTO_INCREMENT PRIMARY KEY,
     author_name VARCHAR(215) NOT NULL
 );
@@ -25,7 +25,7 @@ CREATE TABLE Authors (
 -- =========================================================
 -- TABLE: Books
 -- =========================================================
-CREATE TABLE Books (
+CREATE TABLE IF NOT EXISTS Books (
     book_id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(130) NOT NULL,
     author_id INT NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE Books (
 -- =========================================================
 -- TABLE: Customers
 -- =========================================================
-CREATE TABLE Customers (
+CREATE TABLE IF NOT EXISTS Customers (
     customer_id INT AUTO_INCREMENT PRIMARY KEY,
     customer_name VARCHAR(215) NOT NULL,
     email VARCHAR(215) UNIQUE NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE Customers (
 -- =========================================================
 -- TABLE: Orders
 -- =========================================================
-CREATE TABLE Orders (
+CREATE TABLE IF NOT EXISTS Orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     customer_id INT NOT NULL,
     order_date DATE NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE Orders (
 -- =========================================================
 -- TABLE: Order_Details
 -- =========================================================
-CREATE TABLE Order_Details (
+CREATE TABLE IF NOT EXISTS Order_Details (
     orderdetailid INT AUTO_INCREMENT PRIMARY KEY,
     order_id INT NOT NULL,
     book_id INT NOT NULL,
@@ -103,4 +103,5 @@ INSERT INTO Order_Details (order_id, book_id, quantity) VALUES
 -- =========================================================
 -- END OF SCRIPT
 -- =========================================================
+
 
