@@ -1,74 +1,47 @@
--- =========================================================
--- FILE: task_2.sql
--- DESCRIPTION: Creates all tables for the 'alx_book_store' database
--- AUTHOR: Ibiniyi Timothy
--- DATE: 2025-10-19
--- =========================================================
+-- Create all tables for alx_book_store database
 
--- USE THE DATABASE
+-- Switch to the database
 USE alx_book_store;
 
--- =========================================================
--- TABLE: AUTHORS
--- =========================================================
-CREATE TABLE IF NOT EXISTS AUTHORS (
+-- 1. AUTHORS TABLE
+CREATE TABLE IF NOT EXISTS authors (
     author_id INT AUTO_INCREMENT PRIMARY KEY,
     author_name VARCHAR(215) NOT NULL
 );
 
--- =========================================================
--- TABLE: BOOKS
--- =========================================================
-CREATE TABLE IF NOT EXISTS BOOKS (
+-- 2. BOOKS TABLE
+CREATE TABLE IF NOT EXISTS books (
     book_id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(130) NOT NULL,
-    author_id INT NOT NULL,
-    price DOUBLE NOT NULL,
+    author_id INT,
+    price DOUBLE,
     publication_date DATE,
-    FOREIGN KEY (author_id) REFERENCES AUTHORS(author_id)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
+    FOREIGN KEY (author_id) REFERENCES authors(author_id)
 );
 
--- =========================================================
--- TABLE: CUSTOMERS
--- =========================================================
-CREATE TABLE IF NOT EXISTS CUSTOMERS (
+-- 3. CUSTOMERS TABLE
+CREATE TABLE IF NOT EXISTS customers (
     customer_id INT AUTO_INCREMENT PRIMARY KEY,
     customer_name VARCHAR(215) NOT NULL,
     email VARCHAR(215) UNIQUE NOT NULL,
     address TEXT
 );
 
--- =========================================================
--- TABLE: ORDERS
--- =========================================================
-CREATE TABLE IF NOT EXISTS ORDERS (
+-- 4. ORDERS TABLE
+CREATE TABLE IF NOT EXISTS orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_id INT NOT NULL,
-    order_date DATE NOT NULL,
-    FOREIGN KEY (customer_id) REFERENCES CUSTOMERS(customer_id)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
+    customer_id INT,
+    order_date DATE,
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
 );
 
--- =========================================================
--- TABLE: ORDER_DETAILS
--- =========================================================
-CREATE TABLE IF NOT EXISTS ORDER_DETAILS (
+-- 5. ORDER_DETAILS TABLE
+CREATE TABLE IF NOT EXISTS order_details (
     orderdetailid INT AUTO_INCREMENT PRIMARY KEY,
-    order_id INT NOT NULL,
-    book_id INT NOT NULL,
-    quantity DOUBLE NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES ORDERS(order_id)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
-    FOREIGN KEY (book_id) REFERENCES BOOKS(book_id)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
+    order_id INT,
+    book_id INT,
+    quantity DOUBLE,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    FOREIGN KEY (book_id) REFERENCES books(book_id)
 );
-
--- =========================================================
--- END OF SCRIPT
--- =========================================================
 
