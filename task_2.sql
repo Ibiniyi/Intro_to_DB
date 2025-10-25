@@ -31,9 +31,9 @@ CREATE TABLE Books (
 -- ========================
 CREATE TABLE Customers (
     customer_id INT PRIMARY KEY AUTO_INCREMENT,
-    customer_name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    address VARCHAR(200)
+    customer_name VARCHAR(215) NOT NULL,
+    email VARCHAR(215) UNIQUE NOT NULL,
+    address TEXT
 );
 
 -- ========================
